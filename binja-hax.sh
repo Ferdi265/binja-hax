@@ -50,14 +50,16 @@ if [[ $FATAL -eq 1 ]]; then
 fi
 
 if [[ ! -w "$BINJA_DIR/qt.conf" ]]; then
-    log "!!" "cannot write to qt.conf in BINJA_DIR"
+    log "!!" "cannot write to qt.conf in BINJA_DIR, SYSTEM_QT_CONF hack will not work"
 fi
 
 if [[ ! -w "$BINJA_HAX_DIR/qt.orig.conf" ]]; then
-    log "!!" "cannot write to qt.orig.conf in BINJA_HAX_DIR"
+    log "!!" "cannot write to qt.orig.conf in BINJA_HAX_DIR, automatic backup of default qt.conf will not work"
 fi
 
-if [[ ! -f "$BINJA_DIR/.not_updated" ]]; then
+if [[ ! -w "$BINJA_DIR/.not_updated" ]]; then
+    log "!!" "cannot write to .not_updated in BINJA_DIR, update detection will not work"
+elif [[ ! -f "$BINJA_DIR/.not_updated" ]]; then
     log "detected binaryninja update"
 
     if [[ -f "$BINJA_DIR/qt.conf" ]]; then
