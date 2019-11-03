@@ -39,7 +39,8 @@ if [[ -z $BINJA_DIR || ! -d $BINJA_DIR || ! -x "$BINJA_DIR/binaryninja" ]]; then
     FATAL=1
 fi
 
-if [[ -z $BINJA_HAX_DIR || ! -d $BINJA_HAX_DIR || ! -f "$BINJA_HAX_DIR/binja-hax.sh" ]]; then
+if [[ -z $BINJA_HAX_DIR || ! -d $BINJA_HAX_DIR || \
+        ! -f "$BINJA_HAX_DIR/binja-hax.sh" ]]; then
     log "!!" "BINJA_HAX_DIR is not set or does not contain binja-hax.sh script"
     FATAL=1
 fi
@@ -50,15 +51,18 @@ if [[ $FATAL -eq 1 ]]; then
 fi
 
 if [[ ! -w "$BINJA_DIR/qt.conf" ]]; then
-    log "!!" "cannot write to qt.conf in BINJA_DIR, SYSTEM_QT_CONF hack will not work"
+    log "!!" "cannot write to qt.conf in BINJA_DIR, SYSTEM_QT_CONF hack will" \
+        "not work"
 fi
 
 if [[ ! -w "$BINJA_HAX_DIR/qt.orig.conf" ]]; then
-    log "!!" "cannot write to qt.orig.conf in BINJA_HAX_DIR, automatic backup of default qt.conf will not work"
+    log "!!" "cannot write to qt.orig.conf in BINJA_HAX_DIR, automatic backup" \
+        "of default qt.conf will not work"
 fi
 
 if [[ ! -w "$BINJA_DIR/.not_updated" ]]; then
-    log "!!" "cannot write to .not_updated in BINJA_DIR, update detection will not work"
+    log "!!" "cannot write to .not_updated in BINJA_DIR, update detection" \
+        "will not work"
 elif [[ ! -f "$BINJA_DIR/.not_updated" ]]; then
     log "detected binaryninja update"
 
