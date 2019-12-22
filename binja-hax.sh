@@ -89,7 +89,7 @@ if [[ $BINJA_HAX_SYSTEM_LIBRARIES -eq 1 ]]; then
     # workaround some weird symbol bug
     export LD_PRELOAD="$BINJA_DIR/libQt5Positioning.so.5"
     # load system libraries
-    export LD_LIBRARY_PATH=/lib
+    export LD_LIBRARY_PATH=/usr/lib
 fi
 
 if [[ $BINJA_HAX_SYSTEM_QT_CONF -eq 1 ]]; then
