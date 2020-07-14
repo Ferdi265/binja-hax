@@ -11,6 +11,8 @@ Configuration
 Hacks
   BINJA_HAX_SYSTEM_LIBRARIES .. prefer loading libraries from /lib
                                 (needed for wayland support)
+  BINJA_HAX_SYMVER_FIX ........ preload shared object to fix symbol versions
+                                (needed for wayland support)
   BINJA_HAX_SYSTEM_QT_CONF .... use system qt configuration and resources
                                 (needed for wayland support)
   BINJA_HAX_FORCE_WAYLAND ..... force use of wayland
@@ -86,10 +88,15 @@ fi
 if [[ $BINJA_HAX_SYSTEM_LIBRARIES -eq 1 ]]; then
     log "using system libraries"
 
-    # workaround some weird symbol bug
-    export LD_PRELOAD="$BINJA_DIR/libQt5Positioning.so.5"
     # load system libraries
     export LD_LIBRARY_PATH=/usr/lib
+fi
+
+if [[ $BINJA_HAX_SYMVER_FIX -eq 1 ]]; then
+    log "using symver fix"
+
+    # workaround some weird symbol bug
+    export LD_PRELOAD="$BINJA_HAX_DIR/symver_hack/symver_hack.so"
 fi
 
 if [[ $BINJA_HAX_SYSTEM_QT_CONF -eq 1 ]]; then

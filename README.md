@@ -16,6 +16,8 @@ Configuration
 Hacks
   BINJA_HAX_SYSTEM_LIBRARIES .. prefer loading libraries from /lib
                                 (needed for wayland support)
+  BINJA_HAX_SYMVER_FIX ........ preload shared object to fix symbol versions
+                                (needed for wayland support)
   BINJA_HAX_SYSTEM_QT_CONF .... use system qt configuration and resources
                                 (needed for wayland support)
   BINJA_HAX_FORCE_WAYLAND ..... force use of wayland
@@ -37,6 +39,8 @@ or it might not work at all.
 3. export `BINJA_HAX_DIR` to point to the directory you installed this
    repository to
 4. put `binja-hax.sh` somewhere in your `PATH`
+5. if you intend to use `BINJA_HAX_SYMVER_FIX`, run `make` once in the
+   `symver_fix/` directory
 
 For some of the hacks to work, the `BINJA_DIR` and `BINJA_HAX_DIR` directories
 need to be writable.
@@ -65,5 +69,6 @@ The quickest way to provide wayland support for binaryninja is to use these
 hacks:
 
 - `BINJA_HAX_SYSTEM_LIBRARIES`
+- `BINJA_HAX_SYMVER_FIX`
 - `BINJA_HAX_SYSTEM_QT_CONF`
 - `BINJA_HAX_FORCE_WAYLAND` (if wayland is not already default)
