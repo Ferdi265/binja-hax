@@ -50,7 +50,7 @@ overwritten whenever binaryninja updates.
 
 ## Binaryninja Updates
 
-Open updating, binaryninja replaces the `qt.conf` with the new, updated version.
+When updating, binaryninja replaces the `qt.conf` with the new, updated version.
 
 This means that when using the `SYSTEM_LIBRARIES`, `SYSTEM_QT_CONF`, or
 `FORCE_WAYLAND` hacks, binaryninja might not start the first time after
@@ -60,8 +60,9 @@ When running `binja-hax.sh` a second time after that, it should correctly
 identify binaryninja has updated and start up successfully.
 
 In case the libraries binaryninja ships with change, the `SYSTEM_LIBRARIES` hack
-might stop working. This can sometimes be fixed by adjusting the `LD_PRELOAD`
-line in the script.
+might stop working. This can often be fixed by adjusting the symbols overridden
+in the `symver_hack/symver_hack.s` file and using the `BINJA_HAX_SYMVER_FIX`
+hack.
 
 ## Wayland Support
 
