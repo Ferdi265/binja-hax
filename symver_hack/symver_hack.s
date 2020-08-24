@@ -14,3 +14,4 @@ fix_symver _ZdlPvm Qt_5
 fix_symver _ZSt24__throw_out_of_range_fmtPKcz Qt_5
 fix_symver __cxa_throw_bad_array_new_length Qt_5
 fix_symver _ZNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEE9_M_createERmm Qt_5
+fix_symver _ZNSt11logic_errorC1EPKc Qt_5
