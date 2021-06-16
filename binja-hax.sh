@@ -101,7 +101,20 @@ fi
 
 if [[ $BINJA_HAX_SYSTEM_QT_CONF -eq 1 ]]; then
     log "using system qt configuration"
-    ln -sf "$BINJA_HAX_DIR/qt.system.conf" "$BINJA_DIR/qt.conf"
+
+    if [[ -f "$BINJA_DIR/libQt6Core.so.6" ]]; then
+        log "detected qt6, using system qt6 configuration"
+        SYSTEM_QT_CONF_NAME=qt6.system.conf
+        ln -sf "$BINJA_HAX_DIR/qt6.system.conf" "$BINJA_DIR/qt.conf"
+    elif [[ -f "$BINJA_DIR/libQt5Core.so.5" ]]; then
+        log "detected qt5, using system qt5 configuration"
+        SYSTEM_QT_CONF_NAME=qt5.system.conf
+    else
+        log "assuming qt5, using system qt5 configuration"
+        SYSTEM_QT_CONF_NAME=qt5.system.conf
+    fi
+
+    ln -sf "$BINJA_HAX_DIR/$SYSTEM_QT_CONF_NAME" "$BINJA_DIR/qt.conf"
 else
     log "using original qt configuration"
     ln -sf "$BINJA_HAX_DIR/qt.orig.conf" "$BINJA_DIR/qt.conf"
