@@ -17,7 +17,7 @@ Hacks
   BINJA_HAX_SYSTEM_LIBRARIES .. prefer loading libraries from /lib
                                 (needed for wayland support)
   BINJA_HAX_SYMVER_FIX ........ preload shared object to fix symbol versions
-                                (needed for wayland support)
+                                (obsolete, but left in if needed in the future)
   BINJA_HAX_SYSTEM_QT_CONF .... use system qt configuration and resources
                                 (needed for wayland support)
   BINJA_HAX_FORCE_WAYLAND ..... force use of wayland
@@ -59,10 +59,18 @@ updating.
 When running `binja-hax.sh` a second time after that, it should correctly
 identify binaryninja has updated and start up successfully.
 
-In case the libraries binaryninja ships with change, the `SYSTEM_LIBRARIES` hack
-might stop working. This can often be fixed by adjusting the symbols overridden
-in the `symver_hack/symver_hack.s` file and using the `BINJA_HAX_SYMVER_FIX`
-hack.
+## System Libraries and Qt Versions
+
+The `SYSTEM_LIBRARIES` hack only works if the systems installed Qt libraries
+are compatible with the ones binaryninja is linked to. Since the port to Qt6,
+this can often not be the case, especially after system updates (if the system
+updates sooner than binaryninja) or binaryninja (if binaryninja updates sooner
+than the system).
+
+Previously, binaryninja linked to symbols with incorrect symbol versions in the
+provided Qt libraries (C++ STL functions with a Qt5 symbol version). For this,
+the `SYMVER_FIX` hack was created to redirect those functions to the correct
+ones. Since the Qt6 port, this hack is no longer needed.
 
 ## Wayland Support
 
@@ -70,6 +78,5 @@ The quickest way to provide wayland support for binaryninja is to use these
 hacks:
 
 - `BINJA_HAX_SYSTEM_LIBRARIES`
-- `BINJA_HAX_SYMVER_FIX`
 - `BINJA_HAX_SYSTEM_QT_CONF`
 - `BINJA_HAX_FORCE_WAYLAND` (if wayland is not already default)
